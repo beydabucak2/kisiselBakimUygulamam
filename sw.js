@@ -1,4 +1,4 @@
-const CACHE_NAME = "bakim-rutinim-v2";
+const CACHE_NAME = "bakim-rutinim-v3";
 const APP_SHELL = [
   "./index.html",
   "./manifest.json",
