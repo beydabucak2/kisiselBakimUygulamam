@@ -187,6 +187,24 @@ body.dragging{ overflow:hidden; }
   cursor:pointer;
 }
 .wishlist-buy-btn:active{ background:var(--mint-700); }
+.wishlist-remove-btn{
+  position:absolute;
+  top:2px; right:2px;
+  width:16px; height:16px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.9);
+  color:var(--ink-soft);
+  font-size:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  padding:0;
+  z-index:3;
+  box-shadow:0 1px 4px rgba(0,0,0,0.12);
+}
+.wishlist-remove-btn:active{ background:var(--coral-deep); color:#fff; }
 
 .routine-select-grid{
   display:grid;
@@ -375,20 +393,10 @@ body.dragging{ overflow:hidden; }
 
 .card-grid{
   display:grid;
-  grid-template-rows:repeat(2, auto);
-  grid-auto-flow:column;
-  grid-auto-columns:150px;
-  gap:12px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding-bottom:6px;
-  scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch;
+  grid-template-columns:repeat(3, 1fr);
+  gap:9px;
 }
-.card-grid.compact{ gap:8px; grid-auto-columns:122px; }
-.card-grid::-webkit-scrollbar{ height:6px; }
-.card-grid::-webkit-scrollbar-track{ background:transparent; }
-.card-grid::-webkit-scrollbar-thumb{ background:var(--mint-200); border-radius:10px; }
+.card-grid.compact{ gap:7px; }
 
 .dropzone.drag-active{
   outline:2px dashed var(--mint-300);
@@ -403,29 +411,29 @@ body.dragging{ overflow:hidden; }
 
 .card{
   background:var(--card-bg);
-  border-radius:var(--r-lg);
-  padding:12px;
+  border-radius:16px;
+  padding:8px;
   box-shadow:var(--shadow-sm);
   border:1px solid rgba(175,223,201,0.35);
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:5px;
   animation: pop .25s ease;
   position:relative;
   transition: opacity .15s ease;
   width:100%;
   min-width:0;
-  scroll-snap-align:start;
+  cursor:pointer;
 }
 @keyframes pop{ from{ transform:scale(.92); opacity:0;} to{ transform:scale(1); opacity:1;} }
 .card.drag-source-dim{ opacity:.3; }
 
-.card-grid.compact .card{ padding:8px; gap:5px; border-radius:18px; }
+.card-grid.compact .card{ padding:6px; gap:4px; border-radius:14px; }
 
 .drag-handle{
   position:absolute;
-  top:6px; right:6px;
-  width:26px; height:26px;
+  top:5px; right:5px;
+  width:21px; height:21px;
   border-radius:50%;
   background:rgba(255,255,255,0.85);
   display:flex; align-items:center; justify-content:center;
@@ -433,12 +441,12 @@ body.dragging{ overflow:hidden; }
   z-index:5;
   box-shadow:0 2px 6px rgba(0,0,0,0.08);
 }
-.drag-handle svg{ width:13px; height:13px; }
+.drag-handle svg{ width:11px; height:11px; }
 
 .card .photo-wrap{
   width:100%;
-  aspect-ratio: 1.35 / 1;
-  border-radius:var(--r-md);
+  aspect-ratio: 1.2 / 1;
+  border-radius:12px;
   overflow:hidden;
   background: var(--mint-50);
   border:1.5px solid var(--mint-100);
@@ -448,60 +456,60 @@ body.dragging{ overflow:hidden; }
   position:relative;
 }
 .card .photo-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
-.card .photo-wrap svg.doodle{ width:62%; height:62%; }
-.card-grid.compact .photo-wrap svg.doodle{ width:56%; height:56%; }
+.card .photo-wrap svg.doodle{ width:58%; height:58%; }
+.card-grid.compact .photo-wrap svg.doodle{ width:52%; height:52%; }
 
 .card-name-row{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:6px;
+  gap:4px;
 }
 .card-name{
   font-family:'Caveat', cursive;
   font-weight:700;
-  font-size:20px;
+  font-size:16px;
   line-height:1.05;
   color:var(--ink);
   word-break: break-word;
 }
-.card-grid.compact .card-name{ font-size:16px; }
+.card-grid.compact .card-name{ font-size:13.5px; }
 .rating-chip{
   flex-shrink:0;
-  font-size:14.5px;
+  font-size:11.5px;
   font-weight:700;
   color:#fff;
-  padding:4px 11px;
-  border-radius:11px;
+  padding:3px 8px;
+  border-radius:9px;
   white-space:nowrap;
 }
-.card-grid.compact .rating-chip{ font-size:11.5px; padding:3px 8px; border-radius:9px; }
+.card-grid.compact .rating-chip{ font-size:9.5px; padding:2px 6px; border-radius:8px; }
 
 .finished-badge{
   position:absolute;
-  top:7px; right:7px;
+  top:5px; right:5px;
   background:var(--coral-deep);
   color:#fff;
   font-family:'Quicksand', sans-serif;
   font-weight:700;
-  font-size:12px;
-  padding:4px 10px;
-  border-radius:10px;
+  font-size:9.5px;
+  padding:3px 7px;
+  border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,0.2);
   z-index:4;
   letter-spacing:0.2px;
 }
-.card-grid.compact .finished-badge{ font-size:9.5px; padding:3px 7px; border-radius:8px; top:4px; right:4px; }
+.card-grid.compact .finished-badge{ font-size:8px; padding:2px 5px; border-radius:7px; top:3px; right:3px; }
 
 .star-btn{
   position:absolute;
-  top:7px; left:7px;
-  width:22px; height:22px;
+  top:5px; left:5px;
+  width:18px; height:18px;
   border-radius:50%;
   border:none;
   background:rgba(255,255,255,0.85);
   color:var(--ink-soft);
-  font-size:13px;
+  font-size:11px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -511,86 +519,38 @@ body.dragging{ overflow:hidden; }
   box-shadow:0 2px 6px rgba(0,0,0,0.08);
 }
 .star-btn.active{ color:#F5B400; }
-.card-grid.compact .star-btn{ width:17px; height:17px; font-size:10.5px; top:4px; left:4px; }
+.card-grid.compact .star-btn{ width:15px; height:15px; font-size:9.5px; top:3px; left:3px; }
 
 .usage-row{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:6px;
-  font-size:11.5px;
+  font-size:10px;
   color:var(--ink-soft);
-  flex-wrap:wrap;
-}
-.card-grid.compact .usage-row{ font-size:10px; }
-.usage-inline-controls{
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-.mini-btn{
-  width:20px; height:20px;
-  border-radius:50%;
-  border:none;
-  background:var(--mint-100);
-  color:var(--mint-700);
-  font-size:14px;
-  line-height:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  padding:0;
-  flex-shrink:0;
-}
-.mini-btn:active{ background:var(--mint-200); }
-.usage-input{
-  width:32px;
-  border:none;
-  background:transparent;
-  text-align:center;
   font-weight:700;
-  color:var(--ink);
-  font-family:'Quicksand', sans-serif;
-  font-size:12.5px;
-  -moz-appearance:textfield;
 }
-.usage-input::-webkit-outer-spin-button,
-.usage-input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
-.usage-word{ white-space:nowrap; }
+.card-grid.compact .usage-row{ font-size:9px; }
 
 .duration-row{
-  font-size:11px;
+  font-size:9.5px;
   color:var(--ink-soft);
-  line-height:1.3;
+  line-height:1.25;
 }
-.card-grid.compact .duration-row{ font-size:9.5px; }
+.card-grid.compact .duration-row{ font-size:8.5px; }
 .duration-row.finished{ color:var(--coral-deep); font-weight:700; }
 
 .progress-track{
   position:relative;
   width:100%;
-  height:14px;
-  border-radius:10px;
+  height:11px;
+  border-radius:8px;
   background:var(--mint-50);
   border:1px solid var(--mint-100);
   overflow:hidden;
 }
-.card-grid.compact .progress-track{ height:10px; }
+.card-grid.compact .progress-track{ height:9px; }
 .progress-fill{
   position:absolute;
   top:0; left:0; bottom:0;
   border-radius:10px 0 0 10px;
   transition: width .18s ease, background .18s ease;
-}
-.progress-slider{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  opacity:0;
-  margin:0;
-  cursor:pointer;
 }
 .progress-label{
   position:absolute;
@@ -609,30 +569,29 @@ body.dragging{ overflow:hidden; }
 .card-grid.compact .progress-label{ font-size:8.5px; }
 
 .add-card{
-  border-radius:var(--r-lg);
+  border-radius:16px;
   border:2px dashed var(--mint-300);
   background:transparent;
-  min-height:150px;
+  min-height:100px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:3px;
   color:var(--mint-600);
   cursor:pointer;
   width:100%;
   min-width:0;
-  scroll-snap-align:start;
 }
-.card-grid.compact .add-card{ min-height:100px; border-radius:18px; }
-.add-card .plus{ font-size:30px; font-weight:300; line-height:1; }
-.card-grid.compact .add-card .plus{ font-size:22px; }
+.card-grid.compact .add-card{ min-height:80px; border-radius:14px; }
+.add-card .plus{ font-size:22px; font-weight:300; line-height:1; }
+.card-grid.compact .add-card .plus{ font-size:18px; }
 .add-card span.label{
   font-family:'Caveat', cursive;
-  font-size:17px;
+  font-size:13.5px;
   font-weight:700;
 }
-.card-grid.compact .add-card span.label{ font-size:14px; }
+.card-grid.compact .add-card span.label{ font-size:11.5px; }
 .add-card:active{ background:var(--mint-50); }
 
 /* ghost element while dragging */
@@ -847,7 +806,7 @@ input[type=range]::-moz-range-thumb{
   overflow:hidden;
 }
 .remaining-fill{ position:absolute; top:0; left:0; bottom:0; border-radius:12px 0 0 12px; }
-.remaining-slider{ position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer; }
+.remaining-track{ touch-action:none; cursor:pointer; }
 .remaining-track-label{
   position:absolute;
   inset:0;
@@ -990,9 +949,8 @@ input[type=range]::-moz-range-thumb{
     <div class="field">
       <label>Kalan miktar</label>
       <div class="remaining-row">
-        <div class="remaining-track">
+        <div class="remaining-track" id="f-remaining-track">
           <div class="remaining-fill" id="f-remaining-fill"></div>
-          <input type="range" id="f-remaining" class="remaining-slider" min="0" max="100" step="1" value="100">
           <div class="remaining-track-label" id="f-remaining-track-label"></div>
         </div>
         <div class="remaining-label">
@@ -1529,9 +1487,6 @@ input[type=range]::-moz-range-thumb{
         } else {
           photo.innerHTML = catDoodleSVG();
         }
-        name.textContent = item.name;
-        mini.appendChild(photo);
-        mini.appendChild(name);
       } else {
         if(entry.photo){
           var img2 = document.createElement('img');
@@ -1540,10 +1495,27 @@ input[type=range]::-moz-range-thumb{
         } else {
           photo.innerHTML = catDoodleSVG();
         }
-        name.textContent = entry.name;
-        mini.appendChild(photo);
-        mini.appendChild(name);
+      }
 
+      var removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'wishlist-remove-btn';
+      removeBtn.textContent = '✕';
+      removeBtn.title = 'Listeden kaldır';
+      removeBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        wishlistState = wishlistState.filter(function(x){ return x !== entry; });
+        saveWishlistState();
+        render();
+        showToast('Listeden kaldırıldı');
+      });
+      photo.appendChild(removeBtn);
+
+      name.textContent = (entry.type === 'ref') ? findItemById(entry.itemId).item.name : entry.name;
+      mini.appendChild(photo);
+      mini.appendChild(name);
+
+      if(entry.type === 'new'){
         var buyBtn = document.createElement('button');
         buyBtn.type = 'button';
         buyBtn.className = 'wishlist-buy-btn';
@@ -1592,6 +1564,10 @@ input[type=range]::-moz-range-thumb{
     var card = document.createElement('div');
     card.className = 'card';
     card.dataset.itemId = item.id;
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.drag-handle') || e.target.closest('.star-btn')) return;
+      openModal(catId, item.id, item.subcatId);
+    });
 
     if(showHandle){
       var handle = document.createElement('div');
@@ -1627,7 +1603,6 @@ input[type=range]::-moz-range-thumb{
       starBtn.classList.toggle('active', item.starred);
     });
     photoWrap.appendChild(starBtn);
-    photoWrap.addEventListener('click', function(){ openModal(catId, item.id, item.subcatId); });
     card.appendChild(photoWrap);
 
     var nameRow = document.createElement('div');
@@ -1635,7 +1610,6 @@ input[type=range]::-moz-range-thumb{
     var nameEl = document.createElement('div');
     nameEl.className = 'card-name';
     nameEl.textContent = item.name;
-    nameEl.addEventListener('click', function(){ openModal(catId, item.id, item.subcatId); });
     var ratingChip = document.createElement('div');
     ratingChip.className = 'rating-chip';
     ratingChip.textContent = item.rating.toFixed(1);
@@ -1646,44 +1620,7 @@ input[type=range]::-moz-range-thumb{
 
     var usageRow = document.createElement('div');
     usageRow.className = 'usage-row';
-
-    var controls = document.createElement('div');
-    controls.className = 'usage-inline-controls';
-    var minusBtn = document.createElement('button');
-    minusBtn.className = 'mini-btn';
-    minusBtn.textContent = '−';
-    var usageInput = document.createElement('input');
-    usageInput.type = 'number';
-    usageInput.className = 'usage-input';
-    usageInput.value = item.usage;
-    usageInput.min = 0;
-    usageInput.inputMode = 'numeric';
-    var plusBtn = document.createElement('button');
-    plusBtn.className = 'mini-btn';
-    plusBtn.textContent = '+';
-
-    function commitUsage(v){
-      v = parseInt(v, 10);
-      if(isNaN(v) || v < 0) v = 0;
-      item.usage = v;
-      usageInput.value = v;
-      saveData();
-    }
-    minusBtn.addEventListener('click', function(e){ e.stopPropagation(); commitUsage((parseInt(usageInput.value,10)||0) - 1); });
-    plusBtn.addEventListener('click', function(e){ e.stopPropagation(); commitUsage((parseInt(usageInput.value,10)||0) + 1); });
-    usageInput.addEventListener('click', function(e){ e.stopPropagation(); });
-    usageInput.addEventListener('change', function(e){ e.stopPropagation(); commitUsage(usageInput.value); });
-
-    controls.appendChild(minusBtn);
-    controls.appendChild(usageInput);
-    controls.appendChild(plusBtn);
-
-    var wordSpan = document.createElement('span');
-    wordSpan.className = 'usage-word';
-    wordSpan.textContent = 'kullanım';
-
-    usageRow.appendChild(wordSpan);
-    usageRow.appendChild(controls);
+    usageRow.textContent = (item.usage || 0) + ' kullanım';
     card.appendChild(usageRow);
 
     var durationInfo = getItemDurationInfo(item);
@@ -1702,24 +1639,9 @@ input[type=range]::-moz-range-thumb{
     fill.style.background = pctColor(item.remaining/100);
     fill.style.height = '100%';
     track.appendChild(fill);
-    var slider = document.createElement('input');
-    slider.type = 'range';
-    slider.min = 0; slider.max = 100; slider.step = 1;
-    slider.value = item.remaining;
-    slider.className = 'progress-slider';
     var label = document.createElement('div');
     label.className = 'progress-label';
     label.textContent = '%' + item.remaining + "'i kaldı";
-    slider.addEventListener('input', function(e){
-      e.stopPropagation();
-      item.remaining = parseInt(slider.value, 10);
-      fill.style.width = item.remaining + '%';
-      fill.style.background = pctColor(item.remaining/100);
-      label.textContent = '%' + item.remaining + "'i kaldı";
-    });
-    slider.addEventListener('change', function(e){ e.stopPropagation(); saveData(); });
-    slider.addEventListener('click', function(e){ e.stopPropagation(); });
-    track.appendChild(slider);
     track.appendChild(label);
     card.appendChild(track);
 
@@ -1823,7 +1745,7 @@ input[type=range]::-moz-range-thumb{
   var fEndDate = document.getElementById('f-end-date');
   var fFinishBtn = document.getElementById('f-finish-btn');
   var fDurationHint = document.getElementById('f-duration-hint');
-  var fRemaining = document.getElementById('f-remaining');
+  var fRemainingTrack = document.getElementById('f-remaining-track');
   var fRemainingFill = document.getElementById('f-remaining-fill');
   var fRemainingValue = document.getElementById('f-remaining-value');
   var fRemainingTrackLabel = document.getElementById('f-remaining-track-label');
@@ -1832,7 +1754,7 @@ input[type=range]::-moz-range-thumb{
   var fDelete = document.getElementById('f-delete');
   var fDeleteWrap = document.getElementById('f-delete-wrap');
 
-  var editState = { catId:null, itemId:null, photoData:null, startDate:null, endDate:null };
+  var editState = { catId:null, itemId:null, photoData:null, startDate:null, endDate:null, remaining:100 };
 
   function openModal(catId, itemId, presetSubcatId){
     editState.catId = catId;
@@ -1857,7 +1779,7 @@ input[type=range]::-moz-range-thumb{
       editState.photoData = item.photo || null;
       fRating.value = item.rating;
       fUsageValue.value = item.usage;
-      fRemaining.value = item.remaining;
+      editState.remaining = item.remaining;
       editState.startDate = item.startDate || null;
       editState.endDate = item.endDate || null;
       fDeleteWrap.style.display = 'block';
@@ -1867,7 +1789,7 @@ input[type=range]::-moz-range-thumb{
       editState.photoData = null;
       fRating.value = 7.0;
       fUsageValue.value = 0;
-      fRemaining.value = 100;
+      editState.remaining = 100;
       editState.startDate = null;
       editState.endDate = null;
       fDeleteWrap.style.display = 'none';
@@ -1896,13 +1818,33 @@ input[type=range]::-moz-range-thumb{
     fRatingValue.style.background = scoreColor(v);
   }
   function updateRemainingUI(){
-    var v = parseInt(fRemaining.value, 10);
+    var v = editState.remaining;
     fRemainingFill.style.width = v + '%';
     fRemainingFill.style.height = '100%';
     fRemainingFill.style.background = pctColor(v/100);
     fRemainingValue.textContent = '%' + v;
     fRemainingTrackLabel.textContent = '%' + v + "'i kaldı";
   }
+
+  function setRemainingFromClientX(clientX){
+    var rect = fRemainingTrack.getBoundingClientRect();
+    var pct = (clientX - rect.left) / rect.width;
+    pct = Math.max(0, Math.min(1, pct));
+    editState.remaining = Math.round(pct * 100);
+    updateRemainingUI();
+  }
+  var remainingDragging = false;
+  fRemainingTrack.addEventListener('pointerdown', function(e){
+    remainingDragging = true;
+    try{ fRemainingTrack.setPointerCapture(e.pointerId); }catch(err){}
+    setRemainingFromClientX(e.clientX);
+  });
+  fRemainingTrack.addEventListener('pointermove', function(e){
+    if(!remainingDragging) return;
+    setRemainingFromClientX(e.clientX);
+  });
+  fRemainingTrack.addEventListener('pointerup', function(){ remainingDragging = false; });
+  fRemainingTrack.addEventListener('pointercancel', function(){ remainingDragging = false; });
 
   function updateDurationUI(){
     fEndDate.value = editState.endDate || '';
@@ -1949,7 +1891,6 @@ input[type=range]::-moz-range-thumb{
   });
 
   fRating.addEventListener('input', updateRatingUI);
-  fRemaining.addEventListener('input', updateRemainingUI);
 
   function commitModalUsage(v){
     v = parseInt(v, 10);
@@ -1994,7 +1935,7 @@ input[type=range]::-moz-range-thumb{
       photo: editState.photoData,
       rating: parseFloat(fRating.value),
       usage: parseInt(fUsageValue.value, 10) || 0,
-      remaining: parseInt(fRemaining.value, 10),
+      remaining: editState.remaining,
       subcatId: cd.subcats.length > 0 ? (fSubcat.value || null) : null,
       startDate: editState.startDate || null,
       endDate: editState.endDate || null
